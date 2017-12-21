@@ -1,0 +1,66 @@
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+    outline: none;
+}
+
+.btn-primary,
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    background-color: #7759b3;
+    border-color: #8C6BCD;
+}
+
+.btn-primary.active,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover,
+.open>.dropdown-toggle.btn-primary {
+    background-color: #63469D;
+    border-color: #694F9D;
+}
+
+.popup-form {
+    width: 260px;
+    padding: 20px;
+}
+
+#get-customers {
+    float: left;
+    width: 114px;
+}
+
+#message {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: none;
+}
+
+h1 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+select.form-control {
+    width: 100px;
+    float: left;
+    margin-right: 4px;
+}
+
+.btn-success {
+    width: 100%;
+}
+
+a:focus {
+    outline: none;
+}

@@ -89,13 +89,3 @@ function uriZuul(uri){
 
 	return -1;
 }
-
-/**
- * [sendSongCover 发送歌曲封面地址至background]
- * @return {[type]} [description]
- */
-function sendSongCover(){
-		
-		alert(data_src);
-		
-}

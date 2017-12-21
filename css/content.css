@@ -1,0 +1,214 @@
+.modal {
+    position: fixed;
+    background: #63469D;
+    z-index: 9999;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.message {
+    position: fixed;
+    top: 10%;
+    z-index: 99999;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    font: 16px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-weight: bold;
+}
+
+.message .progress,
+.message .page-number {
+    margin-top: 12px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.bokeh {
+    font-size: 100px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    border: .01em solid rgba(150, 150, 150, 0.1);
+    list-style: none;
+    z-index: 9999;
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    margin-left: -51px;
+}
+
+.bokeh li {
+    position: absolute;
+    width: .2em;
+    height: .2em;
+    border-radius: 50%;
+}
+
+.bokeh li:nth-child(1) {
+    left: 50%;
+    top: 0;
+    margin: 0 0 0 -.1em;
+    background: #00C176;
+    -webkit-transform-origin: 50% 250%;
+    transform-origin: 50% 250%;
+    -webkit-animation: rota 1.13s linear infinite, opa 3.67s ease-in-out infinite alternate;
+    animation: rota 1.13s linear infinite, opa 3.67s ease-in-out infinite alternate;
+}
+
+.bokeh li:nth-child(2) {
+    top: 50%;
+    right: 0;
+    margin: -.1em 0 0 0;
+    background: #FF003C;
+    -webkit-transform-origin: -150% 50%;
+    transform-origin: -150% 50%;
+    -webkit-animation: rota 1.86s linear infinite, opa 4.29s ease-in-out infinite alternate;
+    animation: rota 1.86s linear infinite, opa 4.29s ease-in-out infinite alternate;
+}
+
+.bokeh li:nth-child(3) {
+    left: 50%;
+    bottom: 0;
+    margin: 0 0 0 -.1em;
+    background: #FABE28;
+    -webkit-transform-origin: 50% -150%;
+    transform-origin: 50% -150%;
+    -webkit-animation: rota 1.45s linear infinite, opa 5.12s ease-in-out infinite alternate;
+    animation: rota 1.45s linear infinite, opa 5.12s ease-in-out infinite alternate;
+}
+
+.bokeh li:nth-child(4) {
+    top: 50%;
+    left: 0;
+    margin: -.1em 0 0 0;
+    background: #88C100;
+    -webkit-transform-origin: 250% 50%;
+    transform-origin: 250% 50%;
+    -webkit-animation: rota 1.72s linear infinite, opa 5.25s ease-in-out infinite alternate;
+    animation: rota 1.72s linear infinite, opa 5.25s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes rota {
+    from {}
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes rota {
+    from {}
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes opa {
+    0% {}
+    12.0% {
+        opacity: 0.80;
+    }
+    19.5% {
+        opacity: 0.88;
+    }
+    37.2% {
+        opacity: 0.64;
+    }
+    40.5% {
+        opacity: 0.52;
+    }
+    52.7% {
+        opacity: 0.69;
+    }
+    60.2% {
+        opacity: 0.60;
+    }
+    66.6% {
+        opacity: 0.52;
+    }
+    70.0% {
+        opacity: 0.63;
+    }
+    79.9% {
+        opacity: 0.60;
+    }
+    84.2% {
+        opacity: 0.75;
+    }
+    91.0% {
+        opacity: 0.87;
+    }
+}
+
+@keyframes opa {
+    0% {}
+    12.0% {
+        opacity: 0.80;
+    }
+    19.5% {
+        opacity: 0.88;
+    }
+    37.2% {
+        opacity: 0.64;
+    }
+    40.5% {
+        opacity: 0.52;
+    }
+    52.7% {
+        opacity: 0.69;
+    }
+    60.2% {
+        opacity: 0.60;
+    }
+    66.6% {
+        opacity: 0.52;
+    }
+    70.0% {
+        opacity: 0.63;
+    }
+    79.9% {
+        opacity: 0.60;
+    }
+    84.2% {
+        opacity: 0.75;
+    }
+    91.0% {
+        opacity: 0.87;
+    }
+}
+
+#v6_pl_rightmod_hongbaoentrance,
+#v6_pl_content_biztips,
+div[id^="v6_pl_rightmod_ads"],
+#v6_pl_ad_bottomtip,
+div[id^="Pl_Core_ThirdHtmlData"],
+div[id^="Pl_Core_P7MultiPicPlay__"],
+#Pl_Core_T1SingleColumn__4,
+#v6_trustPagelet_recom_member {
+    display: none !important;
+}

@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
             menu_2 = chrome.contextMenus.create({"title": "下载专辑内歌曲封面","contexts":["all"],"onclick":getSongCoverInPlayList});
             break;
         case 3:
-            menu_1 = chrome.contextMenus.create({"title": "下载推荐专辑封面","contexts":["all"],"onclick":getSongCover});
+            menu_1 = chrome.contextMenus.create({"title": "下载推荐专辑封面","contexts":["all"],"onclick":getDiscoverPlayListCover});
             break;
         default:
         }
@@ -68,7 +68,7 @@ function getSongCoverInPlayList(info, tab){
 
 //推荐歌单封面
 function getDiscoverPlayListCover(info, tab){
-        sendMessageToContentScript({"opt":1,"value":4},downloadCover);
+         chrome.tabs.create({"url":"./index.html"}, function(){});
 }
 
 
