@@ -1,9 +1,10 @@
-$('#check_tab').click(function() {
-    sendMessageToContentScript('你好，我是popup！', (response) => {
-            if(response) alert('收到来自content-script的回复：'+response);
-        });
+$('#load_hot').on('click',function(){
+  var category = $('#category').val();
+  var start_page = $('#start_page').val();
+  var end_page = $('#end_page').val();
+  var auto_download = $("#auto_download").is(':checked');
+  chrome.tabs.create({"url":"./index.html?category="+category+"&start_page="+start_page+"&end_page="+end_page+"&auto_download="+auto_download}, function(){});
 });
-
     // 获取当前选项卡ID
 function getCurrentTabId(callback)
 {

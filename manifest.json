@@ -63,7 +63,7 @@
 		"https://*/*" // 可以通过executeScript或者insertCSS访问的网站
 	],
 	// 插件主页，这个很重要，不要浪费了这个免费广告位
-	"homepage_url": "https://www.baidu.com",
+	"homepage_url": "https://weibo.com/musiccover",
 	// 向地址栏注册一个关键字以提供搜索建议，只能设置一个关键字
 	"omnibox": { "keyword" : "go" },
 	// 默认语言

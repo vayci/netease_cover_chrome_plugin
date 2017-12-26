@@ -2,23 +2,49 @@
 <html>
 <head>
 	<title>popup页</title>
-	<meta charset="utf-8"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link href="css/bootstrap-switch.min.css" rel="stylesheet">
 	<style>
 	body {
 		font-family: 'Microsoft Yahei';
-		width: 200px;
-		height: 200px;
+		width: 300px;
 	}
-	
+
 	</style>
 </head>
 <body>
+<div style="padding: 50px 50px">
+    <form class="bs-example bs-example-form" role="form">
+        <div class="input-group">
+            <span class="input-group-addon">类别:</span>
+            <input type="text"  id="category" class="form-control" value="全部">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon">开始:</span>
+            <input type="text"  id="start_page" class="form-control" value="1">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon">结束:</span>
+            <input type="text"  id="end_page" class="form-control" value="10">
+        </div>
+        <br>
+				<div class="checkbox">
+					 <label>
+						 <input type="checkbox" id="auto_download">开启自动下载
+					 </label>
+				 </div>
+				        <br>
+        		<button class="btn btn-primary" id="load_hot">查看最热封面</button>
+    </form>
+</div>
 	<div>
-		<button class="btn btn-primary" id="check_tab">下载封面</button>
-	</div>
-	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+
+	<script type="text/javascript" src="js/bootstrap-switch.min.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
 </body>
 </html>
