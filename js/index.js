@@ -45,7 +45,7 @@ function dealCovers(auto_download,category,start_page,end_page){
   if(auto_download=="true"){
     for(var i = start_page ;i<end_page;i++){
       $.get("http://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35, function(result){
-        var imgs = $(result).find("img.j-flag")
+        var imgs = $(result).find("img.j-flag");
         imgs.each(function(){
               downloadCover($(this).attr("src").replace("?param=140y140",""));
                $('div').append("<img src='"+$(this).attr("src")+"'>");

@@ -30,10 +30,15 @@ function sendMessageToContentScript(message, callback)
         }, function(tabs) {
             var tab = tabs[0];
             chrome.tabs.sendMessage(tab.id, message, function(response) {
-                callback(response.cover_src);
+                callback(response);
             });
         });
     
+}
+
+function downloadCoverFromResponse(response){
+     var uri = response.cover_src;
+     downloadCover(uri);
 }
 
 //下载封面
@@ -48,18 +53,25 @@ function downloadCover(uri){
             }
 
 //通过歌曲id下载封面
-function downloadCoverBySongId(song_ids){
+function downloadCoverBySongId(response){
+    var songs = response.song_ids;
+   for(var i = 0 ;i<songs.length;i++){
+      $.get("http://music.163.com/song?id="+songs[i], function(result){
+               var img_src = $(result).find("img.j-img").attr("data-src");
+               downloadCover(img_src);
+        });
+    }
     //todo 模拟请求 获取封面路径并遍历下载  此处需加代理
 }
 
 /**菜单绑定方法**/
 //歌曲封面
 function getSongCover(info, tab) {  
-        sendMessageToContentScript({"opt":1,"value":1},downloadCover);
+        sendMessageToContentScript({"opt":1,"value":1},downloadCoverFromResponse);
 }   
 //歌单封面
 function getPlayListCover(info, tab) {  
-        sendMessageToContentScript({"opt":1,"value":2},downloadCover);
+        sendMessageToContentScript({"opt":1,"value":2},downloadCoverFromResponse);
 }   
 //歌单内歌曲封面
 function getSongCoverInPlayList(info, tab){

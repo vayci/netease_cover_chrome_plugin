@@ -10,9 +10,9 @@
 	// 图标，一般偷懒全部用一个尺寸的也没问题
 	"icons":
 	{
-		"16": "img/icon.png",
-		"48": "img/icon.png",
-		"128": "img/icon.png"
+		"16": "img/icon16.png",
+		"48": "img/icon48.png",
+		"128": "img/icon128.png"
 	},
 	// 浏览器右上角图标设置，browser_action、page_action、app必须三选一
 	"browser_action": 
