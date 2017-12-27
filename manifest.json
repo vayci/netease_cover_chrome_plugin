@@ -41,7 +41,7 @@
 		"tabs", 
 		"notifications"
 	],
-	"homepage_url": "https://weibo.com/musiccover",
+	"homepage_url": "https://vayci.github.io/netease_cover_chrome_plugin/",
 	"omnibox": { "keyword" : "go" },
 	"default_locale": "zh_CN"
 }
