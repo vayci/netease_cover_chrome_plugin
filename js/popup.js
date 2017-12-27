@@ -6,16 +6,6 @@ $('#load_hot').on('click',function(){
   chrome.tabs.create({"url":"./index.html?category="+category+"&start_page="+start_page+"&end_page="+end_page+"&auto_download="+auto_download}, function(){});
 });
 
-$('#weibo').on('click',function(){
-  chrome.tabs.create({"url":"https://weibo.com/musiccover"}, function(){
-    chrome.notifications.create(src, {
-    type: 'basic',
-    iconUrl: 'img/icon.png',
-    title: '音乐封面君',
-    message: '觉得不错就关注我哦'
-  });
-  });
-});
     // 获取当前选项卡ID
 function getCurrentTabId(callback)
 {
