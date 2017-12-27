@@ -11,7 +11,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	            sendResponse({cover_src: data_src});
 	            break;
 	        case 3:
-	        alert(1);
 	        	var array = new Array();
 	           	var songs = $("#g_iframe").contents().find("span.txt a");
 	           	songs.each(function(){

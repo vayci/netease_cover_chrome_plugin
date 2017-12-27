@@ -24,7 +24,7 @@ function getCoverBycontextMenu(info, tab){
 		type: 'basic',
 		iconUrl: 'img/icon.png',
 		title: '网易云封面',
-		message: '一张封面下载完成'
+		message: '1张封面开始下载'
 	});
 	setTimeout(function(){
 			chrome.notifications.clear(src, function(){})
@@ -52,6 +52,16 @@ function dealCovers(auto_download,category,start_page,end_page){
                 });
     });
     }
+    	var total = (end_page-start_page+1)*35;
+    	chrome.notifications.create("hot_covers", {
+		type: 'basic',
+		iconUrl: 'img/icon.png',
+		title: '网易云封面',
+		message: total+'张封面开始下载'
+	});
+	setTimeout(function(){
+			chrome.notifications.clear("hot_covers", function(){})
+	},2000);
   }else{
     for(var i = start_page ;i<end_page;i++){
       $.get("http://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35, function(result){

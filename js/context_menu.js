@@ -39,6 +39,15 @@ function sendMessageToContentScript(message, callback)
 function downloadCoverFromResponse(response){
      var uri = response.cover_src;
      downloadCover(uri);
+     chrome.notifications.create(uri, {
+        type: 'basic',
+        iconUrl: 'img/icon.png',
+        title: '网易云封面',
+        message: '1张封面开始下载'
+    });
+    setTimeout(function(){
+            chrome.notifications.clear(uri, function(){})
+    },2000);
 }
 
 //下载封面
@@ -61,6 +70,15 @@ function downloadCoverBySongId(response){
                downloadCover(img_src);
         });
     }
+    chrome.notifications.create("playlist_covers", {
+        type: 'basic',
+        iconUrl: 'img/icon.png',
+        title: '网易云封面',
+        message: songs.length+'张封面开始下载'
+    });
+    setTimeout(function(){
+            chrome.notifications.clear("playlist_covers", function(){})
+    },2000);
     //todo 模拟请求 获取封面路径并遍历下载  此处需加代理
 }
 
