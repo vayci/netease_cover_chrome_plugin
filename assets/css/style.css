@@ -1,0 +1,314 @@
+body {
+    background-color: #fff;
+    font-size: 14px;
+    color: #555;
+    padding-top: 50px;
+}
+
+.btn.focus,
+.btn:focus,
+.btn:hover {
+    color: #fff;
+}
+
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+}
+
+a {
+    color: #282828;
+    word-wrap: break-word;
+}
+
+a:hover,
+a:focus {
+    color: #0099e6;
+    text-decoration: none;
+    outline: 0;
+    outline: 0;
+}
+
+.btn-install {
+    margin-right: 8px;
+}
+
+@media (max-width: 480px) {
+    body {
+        text-align: center;
+    }
+    hr {
+        width: 150px;
+    }
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) {
+    body {
+        text-align: center;
+    }
+}
+
+.pad-top {
+    padding-top: 80px;
+}
+
+.btn {
+    border-radius: 3px;
+}
+
+.btn-install {
+    background-color: #3c6c2c;
+    border-color: #8C6BCD;
+    color: #fff;
+    font-size: 18px;
+    padding: 17px 45px;
+    font-weight: 600;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+.btn-install:hover {
+    background-color: #3c6c2c;
+    border-color: #694F9D;
+    color: #fff;
+}
+
+.btn-install:focus {
+    outline: 0;
+}
+
+.underline {
+    border-top: 4px solid #3c6c2c;
+    display: inline-block;
+    width: 320px;
+    height: 1px;
+    margin-bottom: 80px;
+}
+
+.navbar-default {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #fff;
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) {
+    .navbar-default {
+        letter-spacing: normal;
+    }
+}
+
+@media screen (max-width: 768px) {
+    .navbar-default .navbar-right a[type="button"] {
+        float: none !important;
+        border: 0;
+    }
+}
+
+.navbar-default .navbar-toggle {
+    border: 0;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: transparent;
+}
+
+.navbar-default .navbar-toggle > .glyphicon {
+    color: #3c6c2c;
+}
+
+.navbar-default .navbar-brand {
+    color: #282828;
+}
+
+.navbar-default .navbar-brand .logo {
+    background-image: url(../img/logo.png);
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    margin-top: -6px;
+    margin-right: 4px;
+    float: left;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #282828;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #3c6c2c;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: transparent;
+    color: #3c6c2c;
+}
+
+.navbar-default .navbar-right a[type="button"] {
+    padding: 6px 20px 6px 20px;
+    color: #fff;
+}
+
+.navbar-default .navbar-right a[type="button"]:hover,
+.navbar-default .navbar-right a[type="button"]:focus {
+    background-color: transparent;
+    color: #06979e;
+}
+
+.headerwrap {
+    background: url("../img/header-bg.jpg") no-repeat center top;
+    background-size: cover;
+    padding-top: 80px;
+}
+
+.headerwrap .col-lg-2 {
+    padding-top: 40px;
+}
+
+.headerwrap h1 {
+    margin-top: 30px;
+    color: white;
+    font-size: 60px;
+}
+
+.headerwrap h3 {
+    color: white;
+    font-size: 30px;
+}
+
+.headerwrap h4 {
+    color: white;
+    font-weight: 700;
+    text-align: left;
+}
+
+.headerwrap p {
+    text-align: left;
+    color: #fff;
+}
+
+@media (max-width: 480px) {
+    .headerwrap h1 {
+        font-size: 42px;
+    }
+    .headerwrap .col-lg-2 h4,
+    .headerwrap .col-lg-2 p {
+        text-align: center;
+    }
+}
+
+.helpwrap {
+    background-color: #f5f5f5;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.helpwrap a {
+    text-decoration: underline;
+}
+
+.helpwrap .col-lg-6 img {
+    display: table;
+    margin: 0 auto;
+}
+
+.helpwrap .col-lg-6 h4,
+@media (max-width: 480px) {
+    .helpwrap .col-lg-4 {
+        padding-top: 0;
+    }
+}
+
+.divider {
+    max-height: 350px;
+    padding: 60px;
+    background: #3c6c2c;
+}
+
+.divider .item:hover {
+    cursor: pointer;
+}
+
+.divider h3 {
+    font-size: 34px;
+    color: #fff;
+}
+
+.divider h4 {
+    padding-top: 15px;
+    color: #fff;
+}
+
+.divider a {
+    color: #fff;
+}
+
+@media (max-width: 480px) {
+    .divider {
+        max-height: 375px;
+    }
+    .divider .carousel-inner {
+        padding: 0;
+    }
+}
+
+.installwrap {
+    background-color: #fff;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.copywrap {
+    background: #222;
+    padding-top: 20px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.copywrap a {
+    margin: 0 5px;
+    color: #fff;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+.copywrap .contact-info {
+    float: right;
+}
+
+.copywrap .contact-info span {
+    display: inline-block;
+}
+
+#back-top {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#back-top .glyphicon-arrow-up {
+    font-size: 16px;
+    padding: 10px;
+    color: #fff;
+}
+
+.homepage{
+  height: 765px;
+}
+@media screen and (max-height: 700px) {
+  .homepage{
+    height: 500px;
+  }
+}
