@@ -1,9 +1,14 @@
 $('#load_hot').on('click',function(){
   var category = $('#category').val();
+  var search_words = $('#search_words').val();
   var start_page = $('#start_page').val();
   var end_page = $('#end_page').val();
   var auto_download = $("#auto_download").is(':checked');
-  chrome.tabs.create({"url":"./index.html?category="+category+"&start_page="+start_page+"&end_page="+end_page+"&auto_download="+auto_download}, function(){});
+  if(search_words!=''&&search_words!=null){
+  	 chrome.tabs.create({"url":"http://music.163.com/#/search/m/?id=584701281&s="+search_words+"&type=1000"}, function(){});
+  	}else{
+  	 chrome.tabs.create({"url":"./index.html?category="+category+"&start_page="+start_page+"&end_page="+end_page+"&auto_download="+auto_download}, function(){});
+  	}
 });
 
     // 获取当前选项卡ID

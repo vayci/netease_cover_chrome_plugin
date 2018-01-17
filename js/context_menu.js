@@ -7,6 +7,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
     chrome.contextMenus.removeAll();
     switch(request)
         {
+        case -1:
+            break;
         case 1:
             menu_1 = chrome.contextMenus.create({"title": "下载歌曲封面","contexts":["all"],"onclick":getSongCover});
             break;
@@ -18,6 +20,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
             menu_1 = chrome.contextMenus.create({"title": "下载推荐专辑封面","contexts":["all"],"onclick":getDiscoverPlayListCover});
             break;
         default:
+            var storage=window.localStorage;
+            storage.setItem("covers",request);
+            chrome.tabs.create({"url":"./search.html"}, function(){});
+             break;
         }
 });
 
@@ -101,6 +107,13 @@ function getDiscoverPlayListCover(info, tab){
          chrome.tabs.create({"url":"./index.html"}, function(){});
 }
 
+function setCookie(cname,cvalue,exdays)
+{
+  var d = new Date();
+  d.setTime(d.getTime()+(exdays*24*60*60*1000));
+  var expires = "expires="+d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}
 
 
 

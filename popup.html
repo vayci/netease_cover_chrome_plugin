@@ -15,30 +15,30 @@
 	</style>
 </head>
 <body>
-<div style="padding: 30px 30px">
+<div style="padding: 20px 20px">
 	 <h3>网易云封面助手 <a href="https://weibo.com/musiccover" target="_blank"><img src="img/weibo-logo.png" id="weibo"></a></h3>
     <form class="bs-example bs-example-form" role="form">
         <div class="input-group">
             <span class="input-group-addon">类别:</span>
             <input type="text"  id="category" class="form-control" value="全部">
         </div>
-        <br>
+        <div class="input-group">
+            <span class="input-group-addon">搜索:</span>
+            <input type="text"  id="search_words" class="form-control" value="">
+        </div>
         <div class="input-group">
             <span class="input-group-addon">开始:</span>
             <input type="text"  id="start_page" class="form-control" value="1">
         </div>
-        <br>
         <div class="input-group">
             <span class="input-group-addon">结束:</span>
             <input type="text"  id="end_page" class="form-control" value="10">
         </div>
-        <br>
-				<div class="checkbox">
-					 <label>
-						 <input type="checkbox" id="auto_download">开启自动下载
-					 </label>
-				 </div>
-				        <br>
+		<div class="checkbox">
+			 <label>
+				 <input type="checkbox" id="auto_download">开启自动下载
+			 </label>
+		 </div>
         		<button class="btn btn-primary" id="load_hot">开始采集</button>
     </form>
 </div>

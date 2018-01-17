@@ -39,6 +39,7 @@
 		"contextMenus", 
 		"downloads",
 		"tabs", 
+		"storage",
 		"notifications"
 	],
 	"homepage_url": "https://vayci.github.io/netease_cover_chrome_plugin/",

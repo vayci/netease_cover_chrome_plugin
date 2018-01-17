@@ -29,6 +29,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 //注入时更新右键菜单
 $(function(){
 	var type = uriZuul(location.href);
+	    if(type == 4){
+    	getSearchCover(createCoverPage);
+    	return;
+    }
 	chrome.runtime.sendMessage(type, function(response) {});
 })
 
@@ -51,6 +55,10 @@ $(function(){
 //url发生变化，通知background重新创建右键菜单
 function hashChangeFire(){
     var type = uriZuul(location.href);
+    if(type == 4){
+    	getSearchCover(createCoverPage);
+    	return;
+    }
 	chrome.runtime.sendMessage(type, function(response) {});
 }
 
@@ -64,6 +72,7 @@ function uriZuul(uri){
 	var patt1 = new RegExp("http://music.163.com/#/song");
 	var patt2 = new RegExp("http://music.163.com/#/playlist");
 	var patt3 = new RegExp("http://music.163.com/#/discover/playlist");
+	var patt4 = new  RegExp("http://music.163.com/#/search/m/");
 
 	//下载歌曲封面
 	regexResult = patt1.exec(uri);
@@ -77,5 +86,56 @@ function uriZuul(uri){
 	regexResult = patt3.exec(uri);
 	if(regexResult!=null)return 3;
 
+	//搜索歌单封面
+	regexResult = patt4.exec(uri);
+	if(regexResult!=null)return 4;
+
 	return -1;
 }
+
+/**
+ * 获取搜索歌单封面array
+ * @param  {[type]} array [description]
+ * @return {[type]}       [description]
+ */
+function getSearchCover(callback){
+ var array = new Array();
+	var next_page = $("#g_iframe").contents().find("a.znxt");
+	var covers_page_one = $("#g_iframe").contents().find("div.u-cover").find("img");
+	   		 covers_page_one.each(function(){
+	   			array.push($(this).attr("src"));
+	    	});
+
+	//每隔一秒尝试翻页
+	var turn_page_timer = setInterval(function(){
+	 //每次翻页后0.5秒获取数据	
+	 //console.log("翻页");
+
+	 if($(next_page).hasClass("js-disabled")){
+	    	clearInterval(turn_page_timer);
+	    		//console.log("翻页结束");
+				callback(array);
+	    }else{
+	    	var id = $(next_page).attr("id");
+			document.getElementById('g_iframe').contentWindow.document.getElementById(id).click();
+				 setTimeout(function(){
+			 	var covers = $("#g_iframe").contents().find("div.u-cover").find("img");
+			   		 covers.each(function(){
+			   			array.push($(this).attr("src"));
+			    	});
+			   		},500);
+	    }
+	},1000);
+
+	
+}
+
+/**
+ * 生成页面
+ * @param  {[type]} array [description]
+ * @return {[type]}       [description]
+ */
+function createCoverPage(array){
+chrome.runtime.sendMessage(array, function(response) {});
+}
+
