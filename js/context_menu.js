@@ -42,6 +42,7 @@ function sendMessageToContentScript(message, callback)
     
 }
 
+//从ContentScript response下载封面
 function downloadCoverFromResponse(response){
      var uri = response.cover_src;
      downloadCover(uri);
@@ -107,13 +108,6 @@ function getDiscoverPlayListCover(info, tab){
          chrome.tabs.create({"url":"./index.html"}, function(){});
 }
 
-function setCookie(cname,cvalue,exdays)
-{
-  var d = new Date();
-  d.setTime(d.getTime()+(exdays*24*60*60*1000));
-  var expires = "expires="+d.toGMTString();
-  document.cookie = cname + "=" + cvalue + "; " + expires;
-}
 
 
 

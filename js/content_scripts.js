@@ -62,11 +62,7 @@ function hashChangeFire(){
 	chrome.runtime.sendMessage(type, function(response) {});
 }
 
-/**
- * [uriZuul 返回页面类型]
- * @param  {[type]} uri [打开地址]
- * @return {[type]}     []
- */
+//url路由
 function uriZuul(uri){
 	var regexResult = null;
 	var patt1 = new RegExp("http://music.163.com/#/song");
@@ -93,11 +89,7 @@ function uriZuul(uri){
 	return -1;
 }
 
-/**
- * 获取搜索歌单封面array
- * @param  {[type]} array [description]
- * @return {[type]}       [description]
- */
+//获取搜索歌单封面array
 function getSearchCover(callback){
  var array = new Array();
 	var next_page = $("#g_iframe").contents().find("a.znxt");
@@ -110,7 +102,6 @@ function getSearchCover(callback){
 	var turn_page_timer = setInterval(function(){
 	 //每次翻页后0.5秒获取数据	
 	 //console.log("翻页");
-
 	 if($(next_page).hasClass("js-disabled")){
 	    	clearInterval(turn_page_timer);
 	    		//console.log("翻页结束");
@@ -130,12 +121,8 @@ function getSearchCover(callback){
 	
 }
 
-/**
- * 生成页面
- * @param  {[type]} array [description]
- * @return {[type]}       [description]
- */
+//生成搜索封面汇总页面
 function createCoverPage(array){
-chrome.runtime.sendMessage(array, function(response) {});
+	chrome.runtime.sendMessage(array, function(response) {});
 }
 
