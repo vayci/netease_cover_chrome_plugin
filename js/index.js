@@ -9,8 +9,8 @@ $(function(){
 });
 
 //下载封面
-function downloadCover(uri){
-	var name = uri.replace(/http:\/\/[\w\W]*.music.126.net\//,"").replace("/","");
+function downloadCover(uri,name){
+	//var name = uri.replace(/http:\/\/[\w\W]*.music.126.net\//,"").replace("/","");
         chrome.downloads.download({
             url: uri,
             conflictAction: 'overwrite',
@@ -21,8 +21,9 @@ function downloadCover(uri){
 
 //右击封面时操作：下载
 function getCoverBycontextMenu(info, tab){
-  var src = info.srcUrl.replace("?param=140y140","");
-  downloadCover(src);
+  var src = info.srcUrl.replace("param=140y140&","");
+  var name ="playlist_"+src.substring(src.lastIndexOf("=")+1)+".jpg";
+  downloadCover(src,name);
 	chrome.notifications.create(src, {
 		type: 'basic',
 		iconUrl: 'img/icon.png',
@@ -41,8 +42,10 @@ function dealCovers(auto_download,category,start_page,end_page){
       $.get("http://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35, function(result){
         var imgs = $(result).find("img.j-flag");
         imgs.each(function(){
-              downloadCover($(this).attr("src").replace("?param=140y140",""));
-               $('div').append("<img src='"+$(this).attr("src")+"'>");
+               var href =  $(this).next().attr("href");
+               $('div').append("<img src='"+$(this).attr('src')+"&playlist="+href.substring(href.lastIndexOf('=')+1)+"'>");
+               var name ="playlist_"+href.substring(href.lastIndexOf("=")+1)+".jpg";
+               downloadCover($(this).attr("src").replace("?param=140y140",""),name);
                 });
     });
     }
@@ -61,7 +64,8 @@ function dealCovers(auto_download,category,start_page,end_page){
       $.get("http://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35, function(result){
         var imgs = $(result).find("img.j-flag")
         imgs.each(function(){
-               $('div').append("<img src='"+$(this).attr("src")+"'>");
+                var href =  $(this).next().attr("href");
+               $('div').append("<img src='"+$(this).attr('src')+"&playlist="+href.substring(href.lastIndexOf('=')+1)+"'>");
                 });
     });
     }

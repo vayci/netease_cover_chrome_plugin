@@ -45,7 +45,8 @@ function sendMessageToContentScript(message, callback)
 //从ContentScript response下载封面
 function downloadCoverFromResponse(response){
      var uri = response.cover_src;
-     downloadCover(uri);
+     var name = response.cover_name;
+     downloadCover(uri,name);
      chrome.notifications.create(uri, {
         type: 'basic',
         iconUrl: 'img/icon.png',
@@ -58,8 +59,8 @@ function downloadCoverFromResponse(response){
 }
 
 //下载封面
-function downloadCover(uri){
-        var name = uri.replace(/http:\/\/[\w\W]*.music.126.net\//,"").replace("/","");
+function downloadCover(uri,name){
+       // var name = uri.replace(/http:\/\/[\w\W]*.music.126.net\//,"").replace("/","");
         chrome.downloads.download({
             url: uri,
             conflictAction: 'overwrite',
@@ -74,7 +75,8 @@ function downloadCoverBySongId(response){
    for(var i = 0 ;i<songs.length;i++){
       $.get("http://music.163.com/song?id="+songs[i], function(result){
                var img_src = $(result).find("img.j-img").attr("data-src");
-               downloadCover(img_src);
+               var data_name ="song_"+$(result).find("#content-operation").attr("data-rid")+".jpg";
+               downloadCover(img_src,data_name);
         });
     }
     chrome.notifications.create("playlist_covers", {

@@ -4,11 +4,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 		switch(request.value){
 	        case 1:
 	            var data_src = $("#g_iframe").contents().find("img.j-img").attr("data-src");
-	            sendResponse({cover_src: data_src});
+	            var data_name ="song_"+$("#g_iframe").contents().find("#content-operation").attr("data-rid")+".jpg";
+	            sendResponse({cover_src: data_src,cover_name: data_name});
 	            break;
 	        case 2:
 	            var data_src = $("#g_iframe").contents().find("img.j-img").attr("data-src");
-	            sendResponse({cover_src: data_src});
+	            var data_name ="palylist_"+$("#g_iframe").contents().find("#content-operation").attr("data-rid")+".jpg";
+	            sendResponse({cover_src: data_src,cover_name: data_name});
 	            break;
 	        case 3:
 	        	var array = new Array();
@@ -91,29 +93,32 @@ function uriZuul(uri){
 
 //获取搜索歌单封面array
 function getSearchCover(callback){
- var array = new Array();
+ 	var obj = new Object();
 	var next_page = $("#g_iframe").contents().find("a.znxt");
 	var covers_page_one = $("#g_iframe").contents().find("div.u-cover").find("img");
 	   		 covers_page_one.each(function(){
-	   			array.push($(this).attr("src"));
+	   		 	var href =  $(this).parent().attr("href");
+	   		 	var id = href.substring(href.lastIndexOf('=')+1);
+	   			obj[id]=$(this).attr("src");
 	    	});
 
 	//每隔一秒尝试翻页
 	var turn_page_timer = setInterval(function(){
 	 //每次翻页后0.5秒获取数据	
-	 //console.log("翻页");
 	 if($(next_page).hasClass("js-disabled")){
 	    	clearInterval(turn_page_timer);
-	    		//console.log("翻页结束");
-				callback(array);
+	    	console.log(obj);
+				callback(JSON.stringify(obj));
 	    }else{
 	    	var id = $(next_page).attr("id");
 			document.getElementById('g_iframe').contentWindow.document.getElementById(id).click();
 				 setTimeout(function(){
-			 	var covers = $("#g_iframe").contents().find("div.u-cover").find("img");
-			   		 covers.each(function(){
-			   			array.push($(this).attr("src"));
-			    	});
+			 		var covers = $("#g_iframe").contents().find("div.u-cover").find("img");
+				   		 covers.each(function(){
+				   		 	var href =  $(this).parent().attr("href");
+		   		 			var id = href.substring(href.lastIndexOf('=')+1);
+				   			obj[id]=$(this).attr("src");
+				    	});
 			   		},500);
 	    }
 	},1000);
@@ -121,8 +126,8 @@ function getSearchCover(callback){
 	
 }
 
-//生成搜索封面汇总页面
-function createCoverPage(array){
-	chrome.runtime.sendMessage(array, function(response) {});
+//发送数据值context_menu.js(background),写入本地存储
+function createCoverPage(json_map){
+	chrome.runtime.sendMessage(json_map, function(response) {});
 }
 
