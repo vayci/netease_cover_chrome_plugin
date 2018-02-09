@@ -129,7 +129,7 @@ function getSearchCover(callback){
 	    	var id = $(next_page).attr("id");
 			top.window.frames["contentFrame"].document.getElementById(id).click();
 				 setTimeout(function(){
-			 		var covers = $("#g_iframe").contents().find("div.u-cover").find("img");
+			 		var covers = $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img");
 				   		 covers.each(function(){
 				   		 	var href =  $(this).parent().attr("href");
 		   		 			var id = href.substring(href.lastIndexOf('=')+1);
