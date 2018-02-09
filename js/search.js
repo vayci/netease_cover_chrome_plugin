@@ -1,13 +1,22 @@
 
 $(function(){
-	chrome.contextMenus.removeAll();
-    chrome.contextMenus.create({"title": "下载这张封面","contexts":["image"],"onclick":getCoverBycontextMenu});
     var storage=window.localStorage;
 	var covers_json=storage.getItem("covers");
     var covers_obj=JSON.parse(covers_json);
     for (var key in covers_obj){
-          $('div').append("<img src='"+ covers_obj[key]+"&playlist="+key+"'>");
+          $('div').append("<img style='height:90px;width:90px;' src='"+ covers_obj[key]+"&playlist="+key+"'>");
         }
+    chrome.contextMenus.removeAll();
+    chrome.contextMenus.create({"title": "下载这张封面","contexts":["image"],"onclick":getCoverBycontextMenu});
+    $("img").click(function(event){
+		layer.open({
+		  type: 1,
+		  title: false,
+		  area: ['680px', '680px'],
+		  shadeClose: true,
+		  content: '<img src="'+$(this).attr("src").replace("param=180y180&","")+'" style="width:680px;height:auto;">'
+		}); 
+	});
 });
 
 function getCoverBycontextMenu(info, tab){
@@ -32,5 +41,5 @@ function downloadCover(uri,name){
             conflictAction: 'overwrite',
             filename: name,
             saveAs: false
-                });
-            }
+        });
+}

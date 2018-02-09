@@ -29,11 +29,13 @@
 	"content_scripts": 
 	[
 		{
-			"matches": ["<all_urls>"],
-			"js": ["js/jquery-1.8.3.js","js/content_scripts.js"],
+			//"matches": ["<all_urls>"],
+			"matches": ["http://music.163.com/*","https://music.163.com/*"],
+			"js": ["js/jquery-1.8.3.js","js/content_scripts.js","js/layer.js"],
 			"run_at": "document_end"
 		}
 	],
+	"content_security_policy": "img-src 'self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net data:; style-src 'self' 'unsafe-inline'; script-src self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net; object-src 'self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net",
 	"permissions":
 	[
 		"contextMenus", 

@@ -28,14 +28,35 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	   
 });
 
-//注入时更新右键菜单
-$(function(){
+function initPage(){
 	var type = uriZuul(location.href);
 	    if(type == 4){
     	getSearchCover(createCoverPage);
     	return;
     }
+    var netease_img =  $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img.j-img");
+    var wrap = $(top.window.frames["contentFrame"].document).find("div.u-cover");
+   	$(wrap).click(function(){ 
+   			console.log($(netease_img).attr("src").replace("?param=130y130","").replace("?param=200y200","")); 
+   			window.open($(netease_img).attr("src").replace("?param=130y130","").replace("?param=200y200",""));   
+		 //   layer.open({
+			//   type: 1,
+			//   title: false,
+			//   area: ['680px', '680px'],
+			//   shadeClose: true,
+			//   content: '<img src="'+$(netease_img).attr("src").replace("?param=130y130","")+'" style="width:680px;height:auto;">'
+			// }); 
+		});  
+ //   	$("div").on("click",".u-cover",function(){  
+	//    console.log($(netease_img).attr("src").replace("?param=130y130","").replace("?param=200y200","")); 
+ //   	   window.open($(netease_img).attr("src").replace("?param=130y130","").replace("?param=200y200",""));   
+	// }); 
 	chrome.runtime.sendMessage(type, function(response) {});
+}
+
+//注入时更新右键菜单
+$(function(){
+	initPage();
 })
 
 //url变化监听器
@@ -56,12 +77,7 @@ $(function(){
 
 //url发生变化，通知background重新创建右键菜单
 function hashChangeFire(){
-    var type = uriZuul(location.href);
-    if(type == 4){
-    	getSearchCover(createCoverPage);
-    	return;
-    }
-	chrome.runtime.sendMessage(type, function(response) {});
+   initPage();
 }
 
 //url路由
@@ -107,11 +123,11 @@ function getSearchCover(callback){
 	 //每次翻页后0.5秒获取数据	
 	 if($(next_page).hasClass("js-disabled")){
 	    	clearInterval(turn_page_timer);
-	    	console.log(obj);
+	    	//console.log(obj);
 				callback(JSON.stringify(obj));
 	    }else{
 	    	var id = $(next_page).attr("id");
-			document.getElementById('g_iframe').contentWindow.document.getElementById(id).click();
+			top.window.frames["contentFrame"].document.getElementById(id).click();
 				 setTimeout(function(){
 			 		var covers = $("#g_iframe").contents().find("div.u-cover").find("img");
 				   		 covers.each(function(){

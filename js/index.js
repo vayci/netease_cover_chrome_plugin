@@ -6,6 +6,15 @@ $(function(){
   	var end_page = getQueryString('end_page');
   	var auto_download = getQueryString('auto_download');
     dealCovers(auto_download,category,start_page,end_page);
+    $('div').on('click', 'img', function() {
+    		    layer.open({
+		          type: 1,
+		          title: false,
+		          area: ['680px', '680px'], 
+		          shadeClose: true,
+		          content: '<img src="'+$(this).attr("src").replace("param=140y140&","")+'" style="width:680px;height:auto;">'
+		        });
+    });
 });
 
 //下载封面
@@ -43,9 +52,11 @@ function dealCovers(auto_download,category,start_page,end_page){
         var imgs = $(result).find("img.j-flag");
         imgs.each(function(){
                var href =  $(this).next().attr("href");
-               $('div').append("<img src='"+$(this).attr('src')+"&playlist="+href.substring(href.lastIndexOf('=')+1)+"'>");
-               var name ="playlist_"+href.substring(href.lastIndexOf("=")+1)+".jpg";
-               downloadCover($(this).attr("src").replace("?param=140y140",""),name);
+               if(href!=undefined){
+	               $('div').append("<img style='height:90px;width:90px;' src='"+$(this).attr('src')+"&playlist="+href.substring(href.lastIndexOf('=')+1)+"'>");
+	               var name ="playlist_"+href.substring(href.lastIndexOf("=")+1)+".jpg";
+	               downloadCover($(this).attr("src").replace("?param=140y140",""),name);
+          		 }
                 });
     });
     }
@@ -61,13 +72,16 @@ function dealCovers(auto_download,category,start_page,end_page){
 	},2000);
   }else{
     for(var i = start_page ;i<end_page;i++){
-      $.get("http://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35, function(result){
-        var imgs = $(result).find("img.j-flag")
-        imgs.each(function(){
-                var href =  $(this).next().attr("href");
-               $('div').append("<img src='"+$(this).attr('src')+"&playlist="+href.substring(href.lastIndexOf('=')+1)+"'>");
-                });
-    });
+        $.get("http://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35, function(result){
+          var imgs = $(result).find("img.j-flag")
+          imgs.each(function(){
+                  var href =  $(this).next().attr("href");
+                  if(href!=undefined){
+                  	 $('div').append("<img style='height:90px;width:90px;' src='"+$(this).attr('src')+"&playlist="+href.substring(href.lastIndexOf('=')+1)+"'>");
+                  }
+                  });
+
+      });
     }
   }
 }
