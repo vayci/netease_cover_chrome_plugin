@@ -29,35 +29,49 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 });
 
 function initPage(){
+	if ( !$("#layer").length > 0 ) {
+		console.log("add layer");
+		$("body").append("<div id='layer'></div><div class='text'><div id='pop'><img src='' class='original_img'></div></div>");
+		$("#pop").on("click",function(){  
+	    	$("#layer,#pop").hide();
+		});  
+		$("#layer").on("click",function(){  
+		    $("#layer,#pop").hide();
+		}); 
+	} 
+
 	var type = uriZuul(location.href);
 	    if(type == 4){
     	getSearchCover(createCoverPage);
     	return;
     }
-    var netease_img =  $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img.j-img");
-    var wrap = $(top.window.frames["contentFrame"].document).find("div.u-cover");
-   	$(wrap).click(function(){ 
-   			console.log($(netease_img).attr("src").replace("?param=130y130","").replace("?param=200y200","")); 
-   			window.open($(netease_img).attr("src").replace("?param=130y130","").replace("?param=200y200",""));   
-		 //   layer.open({
-			//   type: 1,
-			//   title: false,
-			//   area: ['680px', '680px'],
-			//   shadeClose: true,
-			//   content: '<img src="'+$(netease_img).attr("src").replace("?param=130y130","")+'" style="width:680px;height:auto;">'
-			// }); 
-		});  
- //   	$("div").on("click",".u-cover",function(){  
-	//    console.log($(netease_img).attr("src").replace("?param=130y130","").replace("?param=200y200","")); 
- //   	   window.open($(netease_img).attr("src").replace("?param=130y130","").replace("?param=200y200",""));   
-	// }); 
+    var netease_img =  $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img");
+    var img_src = $(netease_img).attr("src").replace("?param=140y140","").replace("?param=130y130","").replace("?param=200y200","");
+   	$(".original_img").attr("src",img_src);
+   	var wrap = $(top.window.frames["contentFrame"].document).find("div.u-cover");
+	$(wrap).on("click",function(){ 
+   			showlayer();
+	});  
 	chrome.runtime.sendMessage(type, function(response) {});
 }
 
-//注入时更新右键菜单
+function showlayer(){
+    var bh=$(window).height();//获取屏幕高度
+    var bw=$(window).width();//获取屏幕宽度
+    $("#layer").css({
+        height:bh,
+        width:bw,
+        display:"block"
+    });
+    $("#pop").show();
+}
+ 
+
 $(function(){
+	console.log("DOM Content Loaded");
+	//injectCustomJs();
 	initPage();
-})
+});
 
 //url变化监听器
 $(function(){
@@ -77,7 +91,23 @@ $(function(){
 
 //url发生变化，通知background重新创建右键菜单
 function hashChangeFire(){
+		console.log("DOM Content reloaded");
    initPage();
+}
+
+// 向页面注入JS
+function injectCustomJs(jsPath)
+{
+	jsPath = jsPath || 'js/layer.js';
+	var temp = document.createElement('script');
+	temp.setAttribute('type', 'text/javascript');
+	// 获得的地址类似：chrome-extension://ihcokhadfjfchaeagdoclpnjdiokfakg/js/inject.js
+	temp.src = chrome.extension.getURL(jsPath);
+	temp.onload = function()
+	{
+		this.parentNode.removeChild(this);
+	};
+	document.body.appendChild(temp);
 }
 
 //url路由

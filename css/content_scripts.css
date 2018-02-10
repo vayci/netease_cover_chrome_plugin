@@ -1,0 +1,32 @@
+#layer{
+    background-color:gray; 
+     left:0; 
+     opacity:0.5; 
+     position:absolute; 
+     top:0; 
+     z-index:3; 
+     filter:alpha(opacity=50); 
+     -moz-opacity:0.5; 
+     -khtml-opacity:0.5; 
+}
+
+#pop{
+    text-align:center; 
+     background-color:#fff; 
+     height:680px; 
+     left:50%; 
+     margin:-320px 0px 0px -320px;
+     padding:1px; 
+     position:fixed; 
+     position:absolute; 
+     top:50%; 
+     width:680px; 
+     z-index:5; 
+     border-radius:6px; 
+     display:none; 
+     line-height: 200px;
+}
+.original_img{
+	width: 680px;
+	height: 680px;
+}

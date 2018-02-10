@@ -31,7 +31,8 @@
 		{
 			//"matches": ["<all_urls>"],
 			"matches": ["http://music.163.com/*","https://music.163.com/*"],
-			"js": ["js/jquery-1.8.3.js","js/content_scripts.js","js/layer.js"],
+			"js": ["js/jquery-1.8.3.js","js/content_scripts.js"],
+			"css": ["css/content_scripts.css"],
 			"run_at": "document_end"
 		}
 	],
@@ -44,6 +45,7 @@
 		"storage",
 		"notifications"
 	],
+	//"web_accessible_resources": ["js/jquery-1.8.3.js","js/layer.js"],
 	"homepage_url": "https://vayci.github.io/netease_cover_chrome_plugin/",
 	"omnibox": { "keyword" : "go" },
 	"default_locale": "zh_CN"
