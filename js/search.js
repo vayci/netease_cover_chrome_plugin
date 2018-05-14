@@ -14,7 +14,7 @@ $(function(){
 		  title: false,
 		  area: ['680px', '680px'],
 		  shadeClose: true,
-		  content: '<img src="'+$(this).attr("src").replace("param=180y180&","")+'" style="width:680px;height:auto;">'
+		  content: '<img src="'+$(this).attr("src").replace("param=140y140&","").replace("param=180y180&","")+'" style="width:680px;height:auto;">'
 		}); 
 	});
 });
