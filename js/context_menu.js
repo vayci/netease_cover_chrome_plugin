@@ -19,11 +19,19 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
         case 3:
             menu_1 = chrome.contextMenus.create({"title": "下载推荐专辑封面","contexts":["all"],"onclick":getDiscoverPlayListCover});
             break;
-        default:
+        case 4:
             var storage=window.localStorage;
             storage.setItem("covers",request);
             chrome.tabs.create({"url":"./search.html"}, function(){});
              break;
+        case 5:
+             menu_1 = chrome.contextMenus.create({"title": "采集收藏歌单封面","contexts":["all"],"onclick":getCollectPlayListCover});
+            break;
+        default:
+        	var storage=window.localStorage;
+            storage.setItem("covers",request);
+            chrome.tabs.create({"url":"./search.html"}, function(){});
+            break;
         }
 });
 
@@ -108,6 +116,11 @@ function getSongCoverInPlayList(info, tab){
 //推荐歌单封面
 function getDiscoverPlayListCover(info, tab){
          chrome.tabs.create({"url":"./index.html"}, function(){});
+}
+
+//个人收藏歌单封面
+function getCollectPlayListCover(info, tab){
+     sendMessageToContentScript({"opt":1,"value":4},downloadCoverBySongId);
 }
 
 

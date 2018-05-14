@@ -1,3 +1,9 @@
+const  patt1 = new RegExp("http://music.163.com/#/song");
+const  patt2 = new RegExp("http://music.163.com/#/playlist");
+const  patt3 = new RegExp("http://music.163.com/#/discover/playlist");
+const  patt4 = new RegExp("http://music.163.com/#/search/m/");
+const  patt5 = new RegExp("http://music.163.com/#/user/home");
+
 //监听backgroud消息
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	if(request.opt == 1){
@@ -22,7 +28,37 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	           	});
 	           	sendResponse({song_ids: array});
 	            break;
+	        case 4:
+        		var scrolled = 0 ;
+				var i = top.document.getElementById("g_iframe");
+				i.contentWindow.scrollTo(0,100000);
+				var timer = setInterval(function(){
+					i.contentWindow.scrollTo(0,100000);
+					var now = i.contentWindow.scrollY;
+					if(scrolled == now){
+						console.log("end");
+						clearInterval(timer);
+						var obj = {};
+						var covers_page_one = $("#g_iframe").contents().find("div.u-cover").find("img");
+						   		 covers_page_one.each(function(){
+						   		 	var href =  $(this).parent().find('a').attr("href");
+						   		 	if(href==undefined){
+						   		 		console.log($(this));
+						   		 	}	else{
+							   		 	var id = href.substring(href.lastIndexOf('=')+1);
+							   			obj[id]=$(this).attr("src");
+						   		 	}
+						    	});
+				createCoverPage(JSON.stringify(obj));
+					}else{
+						scrolled = now;
+						console.log(now);
+					}
+				},300);
+        	 	
+	        	break;
 	        default:
+	         	break;
 	        }
 	}
 	   
@@ -45,14 +81,15 @@ function initPage(){
     	getSearchCover(createCoverPage);
     	return;
     }
-    var netease_img =  $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img");
-    var img_src = $(netease_img).attr("src").replace("?param=140y140","").replace("?param=130y130","").replace("?param=200y200","");
-   	$(".original_img").attr("src",img_src);
-   	var wrap = $(top.window.frames["contentFrame"].document).find("div.u-cover");
-	$(wrap).on("click",function(){ 
-   			showlayer();
-	});  
-	chrome.runtime.sendMessage(type, function(response) {});
+
+ //    var netease_img =  $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img");
+ //    var img_src = $(netease_img).attr("src").replace("?param=140y140","").replace("?param=130y130","").replace("?param=200y200","");
+ //   	$(".original_img").attr("src",img_src);
+ //   	var wrap = $(top.window.frames["contentFrame"].document).find("div.u-cover");
+	// $(wrap).on("click",function(){ 
+ //   			showlayer();
+	// });  
+	 chrome.runtime.sendMessage(type, function(response) {});
 }
 
 function showlayer(){
@@ -113,11 +150,6 @@ function injectCustomJs(jsPath)
 //url路由
 function uriZuul(uri){
 	var regexResult = null;
-	var patt1 = new RegExp("http://music.163.com/#/song");
-	var patt2 = new RegExp("http://music.163.com/#/playlist");
-	var patt3 = new RegExp("http://music.163.com/#/discover/playlist");
-	var patt4 = new  RegExp("http://music.163.com/#/search/m/");
-
 	//下载歌曲封面
 	regexResult = patt1.exec(uri);
 	if(regexResult!=null)return 1;
@@ -133,6 +165,10 @@ function uriZuul(uri){
 	//搜索歌单封面
 	regexResult = patt4.exec(uri);
 	if(regexResult!=null)return 4;
+
+	//个人主页歌单封面
+	regexResult = patt5.exec(uri);
+	if(regexResult!=null)return 5;
 
 	return -1;
 }
