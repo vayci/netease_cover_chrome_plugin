@@ -1,8 +1,8 @@
-const  patt1 = new RegExp("http://music.163.com/#/song");
-const  patt2 = new RegExp("http://music.163.com/#/playlist");
-const  patt3 = new RegExp("http://music.163.com/#/discover/playlist");
-const  patt4 = new RegExp("http://music.163.com/#/search/m/");
-const  patt5 = new RegExp("http://music.163.com/#/user/home");
+const patt1 = new RegExp("https://music.163.com/#/song");
+const patt2 = new RegExp("https://music.163.com/#/playlist");
+const patt3 = new RegExp("https://music.163.com/#/discover/playlist");
+const patt4 = new RegExp("https://music.163.com/#/search/m/");
+const patt5 = new RegExp("https://music.163.com/#/user/home");
 
 //监听backgroud消息
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
@@ -36,7 +36,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 					i.contentWindow.scrollTo(0,100000);
 					var now = i.contentWindow.scrollY;
 					if(scrolled == now){
-						console.log("end");
 						clearInterval(timer);
 						var obj = {};
 						var covers_page_one = $("#g_iframe").contents().find("div.u-cover").find("img");
@@ -65,30 +64,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 });
 
 function initPage(){
-	if ( !$("#layer").length > 0 ) {
-		console.log("add layer");
-		$("body").append("<div id='layer'></div><div class='text'><div id='pop'><img src='' class='original_img'></div></div>");
-		$("#pop").on("click",function(){  
-	    	$("#layer,#pop").hide();
-		});  
-		$("#layer").on("click",function(){  
-		    $("#layer,#pop").hide();
-		}); 
-	} 
-
 	var type = uriZuul(location.href);
 	    if(type == 4){
     	getSearchCover(createCoverPage);
     	return;
     }
-
- //    var netease_img =  $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img");
- //    var img_src = $(netease_img).attr("src").replace("?param=140y140","").replace("?param=130y130","").replace("?param=200y200","");
- //   	$(".original_img").attr("src",img_src);
- //   	var wrap = $(top.window.frames["contentFrame"].document).find("div.u-cover");
-	// $(wrap).on("click",function(){ 
- //   			showlayer();
-	// });  
 	 chrome.runtime.sendMessage(type, function(response) {});
 }
 
@@ -105,10 +85,8 @@ function showlayer(){
  
 
 $(function(){
-	console.log("DOM Content Loaded");
-	//injectCustomJs();
 	initPage();
-});
+})
 
 //url变化监听器
 $(function(){
@@ -128,8 +106,7 @@ $(function(){
 
 //url发生变化，通知background重新创建右键菜单
 function hashChangeFire(){
-		console.log("DOM Content reloaded");
-   initPage();
+	initPage();
 }
 
 // 向页面注入JS
@@ -175,8 +152,13 @@ function uriZuul(uri){
 
 //获取搜索歌单封面array
 function getSearchCover(callback){
- 	var obj = new Object();
+ 	var obj = {};
+	var count = 0;
 	var next_page = $("#g_iframe").contents().find("a.znxt");
+	if(next_page.length == 0){
+		console.log("我没有找到翻页按钮啊!");
+		return;	
+	}
 	var covers_page_one = $("#g_iframe").contents().find("div.u-cover").find("img");
 	   		 covers_page_one.each(function(){
 	   		 	var href =  $(this).parent().attr("href");
@@ -189,8 +171,7 @@ function getSearchCover(callback){
 	 //每次翻页后0.5秒获取数据	
 	 if($(next_page).hasClass("js-disabled")){
 	    	clearInterval(turn_page_timer);
-	    	//console.log(obj);
-				callback(JSON.stringify(obj));
+			callback(JSON.stringify(obj));
 	    }else{
 	    	var id = $(next_page).attr("id");
 			top.window.frames["contentFrame"].document.getElementById(id).click();

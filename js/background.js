@@ -79,24 +79,25 @@ function downloadCover(uri,name){
 
 //通过歌曲id下载封面
 function downloadCoverBySongId(response){
-    var songs = response.song_ids;
-   for(var i = 0 ;i<songs.length;i++){
-      $.get("http://music.163.com/song?id="+songs[i], function(result){
-               var img_src = $(result).find("img.j-img").attr("data-src");
-               var data_name ="song_"+$(result).find("#content-operation").attr("data-rid")+".jpg";
-               downloadCover(img_src,data_name);
-        });
-    }
-    chrome.notifications.create("playlist_covers", {
-        type: 'basic',
-        iconUrl: 'img/icon.png',
-        title: '网易云封面',
-        message: songs.length+'张封面开始下载'
-    });
-    setTimeout(function(){
-            chrome.notifications.clear("playlist_covers", function(){})
-    },2000);
-    //todo 模拟请求 获取封面路径并遍历下载  此处需加代理
+	if(response!=undefined){
+		var songs = response.song_ids;
+		for(var i = 0 ;i<songs.length;i++){
+		  $.get("https://music.163.com/song?id="+songs[i], function(result){
+				   var img_src = $(result).find("img.j-img").attr("data-src");
+				   var data_name ="song_"+$(result).find("#content-operation").attr("data-rid")+".jpg";
+				   downloadCover(img_src,data_name);
+			});
+		}
+		chrome.notifications.create("playlist_covers", {
+			type: 'basic',
+			iconUrl: 'img/icon.png',
+			title: '网易云封面',
+			message: songs.length+'张封面开始下载'
+		});
+		setTimeout(function(){
+				chrome.notifications.clear("playlist_covers", function(){})
+		},2000);
+	}
 }
 
 /**菜单绑定方法**/

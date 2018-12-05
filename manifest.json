@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "网易云封面",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"description": "网易云音乐封面下载工具",
 	"update_url": "http://upext.chrome.360.cn/intf.php?method=ExtUpdate.query",
 	"icons":
@@ -10,21 +10,24 @@
 		"48": "img/icon48.png",
 		"128": "img/icon128.png"
 	},
+	"permissions":
+	[
+		"contextMenus", 
+		"downloads",
+		"tabs", 
+		"storage",
+		"notifications",
+		"tabs", "https://www.baidu.com/*"
+	],
 	"browser_action": 
 	{
-		"default_icon": "img/icon.png",
+		"default_icon": "img/icon16.png",
 		"default_title": "网易云音乐封面助手",
 		"default_popup": "popup.html"
 	},
-	/*"page_action":
-	{
-		"default_icon": "img/icon.png",
-		"default_title": "我是pageAction",
-		"default_popup": "popup.html"
-	},*/
 	"background":
 	{
-		"scripts": ["js/jquery-1.8.3.js","js/context_menu.js"]
+		"scripts": ["js/jquery-1.8.3.js","js/background.js"]
 	},
 	"content_scripts": 
 	[
@@ -36,15 +39,7 @@
 			"run_at": "document_end"
 		}
 	],
-	"content_security_policy": "img-src 'self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net data:; style-src 'self' 'unsafe-inline'; script-src self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net; object-src 'self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net",
-	"permissions":
-	[
-		"contextMenus", 
-		"downloads",
-		"tabs", 
-		"storage",
-		"notifications"
-	],
+	//"content_security_policy": "img-src 'self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net data:; style-src 'self' 'unsafe-inline'; script-src self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net; object-src 'self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net",
 	//"web_accessible_resources": ["js/jquery-1.8.3.js","js/layer.js"],
 	"homepage_url": "https://vayci.github.io/netease_cover_chrome_plugin/",
 	"omnibox": { "keyword" : "go" },
