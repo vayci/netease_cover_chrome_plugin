@@ -1,4 +1,5 @@
 
+//搜索完成页面处理
 $(function(){
     var storage=window.localStorage;
 	var covers_json=storage.getItem("covers");

@@ -100,28 +100,13 @@ $(function(){
 	        if(ischanged) {
 	            hashChangeFire(); 
 	        }
-	    }, 150);
+	    }, 500);
 	}
 });
 
 //url发生变化，通知background重新创建右键菜单
 function hashChangeFire(){
 	initPage();
-}
-
-// 向页面注入JS
-function injectCustomJs(jsPath)
-{
-	jsPath = jsPath || 'js/layer.js';
-	var temp = document.createElement('script');
-	temp.setAttribute('type', 'text/javascript');
-	// 获得的地址类似：chrome-extension://ihcokhadfjfchaeagdoclpnjdiokfakg/js/inject.js
-	temp.src = chrome.extension.getURL(jsPath);
-	temp.onload = function()
-	{
-		this.parentNode.removeChild(this);
-	};
-	document.body.appendChild(temp);
 }
 
 //url路由
@@ -152,6 +137,7 @@ function uriZuul(uri){
 
 //获取搜索歌单封面array
 function getSearchCover(callback){
+	if(!getSource())return;
  	var obj = {};
 	var count = 0;
 	var next_page = $("#g_iframe").contents().find("a.znxt");
@@ -169,20 +155,29 @@ function getSearchCover(callback){
 	//每隔一秒尝试翻页
 	var turn_page_timer = setInterval(function(){
 	 //每次翻页后0.5秒获取数据	
+	 console.log( $(next_page).attr("id"));
 	 if($(next_page).hasClass("js-disabled")){
 	    	clearInterval(turn_page_timer);
 			callback(JSON.stringify(obj));
+			return;
 	    }else{
-	    	var id = $(next_page).attr("id");
-			top.window.frames["contentFrame"].document.getElementById(id).click();
-				 setTimeout(function(){
-			 		var covers = $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img");
-				   		 covers.each(function(){
-				   		 	var href =  $(this).parent().attr("href");
-		   		 			var id = href.substring(href.lastIndexOf('=')+1);
-				   			obj[id]=$(this).attr("src");
-				    	});
-			   		},500);
+			var id = $(next_page).attr("id");
+			try{
+				top.window.frames["contentFrame"].document.getElementById(id).click();
+			}catch(err){
+				//翻页翻不动了
+				clearInterval(turn_page_timer);
+				callback(JSON.stringify(obj));
+				return;
+			}
+			setTimeout(function(){
+			var covers = $(top.window.frames["contentFrame"].document).find("div.u-cover").find("img");
+					covers.each(function(){
+					var href =  $(this).parent().attr("href");
+					var id = href.substring(href.lastIndexOf('=')+1);
+					obj[id]=$(this).attr("src");
+				});
+			},500);
 	    }
 	},1000);
 
@@ -194,3 +189,7 @@ function createCoverPage(json_map){
 	chrome.runtime.sendMessage(json_map, function(response) {});
 }
 
+function getSource(){
+	let url = window.location.href;
+	return url.indexOf("extension") != -1;
+}

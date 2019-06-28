@@ -1,5 +1,5 @@
 $(function(){
-	chrome.contextMenus.removeAll();
+	  chrome.contextMenus.removeAll();
     chrome.contextMenus.create({"title": "下载这张封面","contexts":["image"],"onclick":getCoverBycontextMenu});
   	var category = getQueryString('category');
   	var start_page = getQueryString('start_page');

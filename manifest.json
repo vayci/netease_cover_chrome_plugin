@@ -3,7 +3,6 @@
 	"name": "网易云封面",
 	"version": "1.0.0",
 	"description": "网易云音乐封面下载工具",
-	"update_url": "http://upext.chrome.360.cn/intf.php?method=ExtUpdate.query",
 	"icons":
 	{
 		"16": "img/icon16.png",
@@ -17,7 +16,7 @@
 		"tabs", 
 		"storage",
 		"notifications",
-		"tabs", "https://www.baidu.com/*"
+		"tabs", "https://music.163.com/*"
 	],
 	"browser_action": 
 	{
@@ -32,16 +31,14 @@
 	"content_scripts": 
 	[
 		{
-			//"matches": ["<all_urls>"],
 			"matches": ["http://music.163.com/*","https://music.163.com/*"],
 			"js": ["js/jquery-1.8.3.js","js/content_scripts.js"],
 			"css": ["css/content_scripts.css"],
 			"run_at": "document_end"
 		}
 	],
-	//"content_security_policy": "img-src 'self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net data:; style-src 'self' 'unsafe-inline'; script-src self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net; object-src 'self' http://music.163.com http://p1.music.126.net http://p2.music.126.net http://p3.music.126.net http://p4.music.126.net",
-	//"web_accessible_resources": ["js/jquery-1.8.3.js","js/layer.js"],
 	"homepage_url": "https://vayci.github.io/netease_cover_chrome_plugin/",
 	"omnibox": { "keyword" : "go" },
+	"content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'",
 	"default_locale": "zh_CN"
 }
