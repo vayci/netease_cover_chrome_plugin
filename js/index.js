@@ -1,6 +1,6 @@
 $(function(){
 	  chrome.contextMenus.removeAll();
-    chrome.contextMenus.create({"title": "下载这张封面","contexts":["image"],"onclick":getCoverBycontextMenu});
+    chrome.contextMenus.create({id:"single-download","title": "下载这张封面","contexts":["image"]});
   	var category = getQueryString('category');
   	var start_page = getQueryString('start_page');
   	var end_page = getQueryString('end_page');
@@ -15,6 +15,14 @@ $(function(){
 		          content: '<img src="'+$(this).attr("src").replace("param=140y140&","")+'" style="width:680px;height:auto;">'
 		        });
     });
+});
+
+chrome.contextMenus.onClicked.addListener(function(info, tab) {
+  switch(info.menuItemId){
+      case 'single-download':
+          getCoverBycontextMenu(info, tab)
+          break;
+  }
 });
 
 //下载封面
@@ -48,7 +56,9 @@ function getCoverBycontextMenu(info, tab){
 function dealCovers(auto_download,category,start_page,end_page){
   if(auto_download=="true"){
     for(var i = start_page ;i<end_page;i++){
-      $.get("https://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35, function(result){
+      var url = "https://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35;
+      console.log(url)
+      $.get(url, function(result){
         var imgs = $(result).find("img.j-flag");
         imgs.each(function(){
                var href =  $(this).next().attr("href");
@@ -72,7 +82,9 @@ function dealCovers(auto_download,category,start_page,end_page){
 	},2000);
   }else{
     for(var i = start_page ;i<end_page;i++){
-        $.get("https://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35, function(result){
+      var url = "https://music.163.com/discover/playlist/?order=hot&cat="+category+"&limit=35&offset="+(i-1)*35;
+      console.log(url)
+        $.get(url, function(result){
           var imgs = $(result).find("img.j-flag")
           imgs.each(function(){
                   var href =  $(this).next().attr("href");

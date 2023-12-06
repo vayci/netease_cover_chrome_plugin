@@ -1,7 +1,7 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "网易云封面",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "网易云音乐封面下载工具",
 	"icons":
 	{
@@ -15,17 +15,25 @@
 		"downloads",
 		"tabs", 
 		"notifications",
-		"tabs", "https://music.163.com/*"
+		"storage"
 	],
-	"browser_action": 
+	"host_permissions": 
+	[
+		"https://music.163.com/*"
+	],
+	"action": 
 	{
-		"default_icon": "img/icon16.png",
+		"default_icon": {
+			"16": "img/icon16.png",
+			"32": "img/icon48.png",
+			"48": "img/icon48.png",
+			"128": "img/icon128.png"
+		},
 		"default_title": "网易云音乐封面助手",
 		"default_popup": "popup.html"
 	},
-	"background":
-	{
-		"scripts": ["js/jquery-1.8.3.js","js/background.js"]
+	"background": {
+		"service_worker": "js/background.js"
 	},
 	"content_scripts": 
 	[
@@ -38,6 +46,6 @@
 	],
 	"homepage_url": "https://vayci.github.io/netease_cover_chrome_plugin/",
 	"omnibox": { "keyword" : "go" },
-	"content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'",
+
 	"default_locale": "zh_CN"
 }

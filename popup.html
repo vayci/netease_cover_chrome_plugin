@@ -18,30 +18,37 @@
 </head>
 <body>
 	<div style="padding: 20px 20px">
-		<h3>网易云封面助手 <a href="https://weibo.com/musiccover" target="_blank"><img src="img/weibo-logo.png" id="weibo"></a></h3>
+		<h3 style="text-align: center;">网易云封面助手 
+			<!-- <a href="https://weibo.com/musiccover" target="_blank"><img src="img/weibo-logo.png" id="weibo"></a> -->
+		</h3>
+		<p style="text-align: center;">
+			v1.1.0
+		</p>
 		<form class="bs-example bs-example-form" role="form">
-			<div class="input-group">
+			<div class="input-group" style="margin-top: 20px;">
 				<span class="input-group-addon">类别:</span>
 				<input type="text"  id="category" class="form-control" value="全部">
 			</div>
-			<div class="input-group">
+			<!-- <div class="input-group" style="margin-top: 10px;">
 				<span class="input-group-addon">搜索:</span>
 				<input type="text"  id="search_words" class="form-control" value="">
-			</div>
-			<div class="input-group">
+			</div> -->
+			<div class="input-group" style="margin-top: 10px;">
 				<span class="input-group-addon">开始:</span>
 				<input type="text"  id="start_page" class="form-control" value="1">
 			</div>
-			<div class="input-group">
+			<div class="input-group" style="margin-top: 10px;">
 				<span class="input-group-addon">结束:</span>
-				<input type="text"  id="end_page" class="form-control" value="50">
+				<input type="text"  id="end_page" class="form-control" value="20">
 			</div>
 			<!--<div class="checkbox">
 				<label>
 					<input type="checkbox" id="auto_download">开启自动下载</br>(此选项可能下载大量文件，不建议勾选)
 				</label>
 			</div>-->
-			<button class="btn btn-primary" id="load_hot">开始采集</button>
+			<div style="text-align: center;">
+				<button class="btn btn-primary" id="load_hot" style="width: 60%;margin-top: 10px;">开始采集</button>
+			</div>
 		</form>
 	</div>
 </body>

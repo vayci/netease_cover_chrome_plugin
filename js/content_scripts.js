@@ -19,16 +19,23 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	            sendResponse({cover_src: data_src,cover_name: data_name});
 	            break;
 	        case 3:
+				const sendResponseCallback = sendResponse;
 	        	var array = new Array();
 	           	var songs = $("#g_iframe").contents().find("span.txt a");
 	           	songs.each(function(){
-	           	var str = $(this).attr("href");
-	           	var id = str.substring(str.indexOf("=")+1);
+					var str = $(this).attr("href");
+					var id = str.substring(str.indexOf("=")+1);
 	           		array.push(id);
 	           	});
-	           	sendResponse({song_ids: array});
+				getCoverInfo(array).then(result => {
+					sendResponseCallback(result)
+				})
+				.catch(error => {
+					console.error(error);
+				});
 	            break;
 	        case 4:
+				var array = new Array();
         		var scrolled = 0 ;
 				var i = top.document.getElementById("g_iframe");
 				i.contentWindow.scrollTo(0,100000);
@@ -43,12 +50,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 						   		 	var href =  $(this).parent().find('a').attr("href");
 						   		 	if(href==undefined){
 						   		 		console.log($(this));
-						   		 	}	else{
+						   		 	}else{
 							   		 	var id = href.substring(href.lastIndexOf('=')+1);
+										var data_name = "song_" + id + ".jpg";
+										var cover = {
+											cover_src: $(this).attr("src"),
+											cover_name: data_name
+										};
+										array.push(cover)
 							   			obj[id]=$(this).attr("src");
 						   		 	}
 						    	});
-				createCoverPage(JSON.stringify(obj));
+								console.log(array)
+								//sendResponse(array)
+								createCoverPage(JSON.stringify(obj));
 					}else{
 						scrolled = now;
 						console.log(now);
@@ -59,13 +74,45 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	        default:
 	         	break;
 	        }
+			return true
 	}
 	   
 });
 
+ function getCoverInfo(songs) {
+	return doGetCoverInfo(songs);
+}
+
+function doGetCoverInfo(songs) {
+	var promises = [];
+    for (var i = 0; i < songs.length; i++) {
+		var promise = fetch("https://music.163.com/song?id=" + songs[i])
+			.then(function(response){
+				return response.text()
+			})
+			.then(function(result) {
+				var img_src = $(result).find("img.j-img").attr("data-src");
+                var data_name = "song_" + $(result).find("#content-operation").attr("data-rid") + ".jpg";
+                var cover = {
+                    cover_src: img_src,
+                    cover_name: data_name
+                };
+                return cover;
+            });
+		promises.push(promise);
+    }
+	return Promise.all(promises)
+        .then(function(results) {
+            return results; // 返回包含所有结果的数组
+        })
+        .catch(function(error) {
+            console.error("Error during fetching:", error);
+        });
+}
+
 function initPage(){
 	var type = uriZuul(location.href);
-	    if(type == 4){
+	if(type == 4){
     	getSearchCover(createCoverPage);
     	return;
     }
@@ -186,6 +233,9 @@ function getSearchCover(callback){
 
 //发送数据值context_menu.js(background),写入本地存储
 function createCoverPage(json_map){
+	chrome.storage.local.set({ "covers": json_map }).then(() => {
+		console.log("Value is set", json_map);
+	  });
 	chrome.runtime.sendMessage(json_map, function(response) {});
 }
 
