@@ -28,9 +28,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
              menu_1 = chrome.contextMenus.create({id: "collect-playlist", "title": "采集收藏歌单封面","contexts":["all"]});
             break;
         default:
-            chrome.tabs.create({"url":"./search.html"}, function(){});
+            console.log('msg', request)
+            chrome.tabs.create({"url":"./search.html"}, function(newTab){
+                setTimeout(function() {
+                    console.log(newTab.id)
+                    chrome.tabs.sendMessage(newTab.id, { data: request });
+                  }, 1000);
+                
+            });
             break;
         }
+     //return true;
 });
 
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
@@ -62,6 +70,7 @@ function sendMessageToContentScript(message, callback)
             currentWindow: true
         }, function(tabs) {
             var tab = tabs[0];
+            console.log('send', tab.id)
             chrome.tabs.sendMessage(tab.id, message, function(response) {
                 callback(response);
             });

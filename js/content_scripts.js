@@ -74,9 +74,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	        default:
 	         	break;
 	        }
-			return true
+			
 	}
-	   
+
 });
 
  function getCoverInfo(songs) {
@@ -233,9 +233,6 @@ function getSearchCover(callback){
 
 //发送数据值context_menu.js(background),写入本地存储
 function createCoverPage(json_map){
-	chrome.storage.local.set({ "covers": json_map }).then(() => {
-		console.log("Value is set", json_map);
-	  });
 	chrome.runtime.sendMessage(json_map, function(response) {});
 }
 
