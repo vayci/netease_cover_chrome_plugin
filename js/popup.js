@@ -1,3 +1,10 @@
+// i18n
+document.getElementById('app-name').textContent = chrome.i18n.getMessage('appName');
+document.getElementById('category').textContent = chrome.i18n.getMessage('category');
+document.getElementById('start-page').textContent = chrome.i18n.getMessage('startPage');
+document.getElementById('end-page').textContent = chrome.i18n.getMessage('endPage');
+document.getElementById('load_hot').textContent = chrome.i18n.getMessage('collect');
+
 document.addEventListener('DOMContentLoaded', function () {
   $('#load_hot').on('click',function(){
   var category = $('#category').val();

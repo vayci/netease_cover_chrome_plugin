@@ -1,4 +1,7 @@
 {
-	"pluginDesc": {"message": "一个简单的Chrome插件demo"},
-	"helloWorld": {"message": "你好啊，世界！"}
+	"appName": {"message": "网易云封面助手"},
+	"category": {"message": "分类"},
+	"startPage": {"message": "开始"},
+	"endPage": {"message": "结束"},
+	"collect": {"message": "开始采集"}
 }

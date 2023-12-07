@@ -7,7 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/popup.css">
 	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-	<script type="text/javascript" src="js/popup.js"></script>
 	<style>
 	body {
 		font-family: 'Microsoft Yahei';
@@ -18,7 +17,7 @@
 </head>
 <body>
 	<div style="padding: 20px 20px">
-		<h3 style="text-align: center;">网易云封面助手 
+		<h3 style="text-align: center;" id="app-name">网易云封面助手 
 			<!-- <a href="https://weibo.com/musiccover" target="_blank"><img src="img/weibo-logo.png" id="weibo"></a> -->
 		</h3>
 		<p style="text-align: center;">
@@ -26,7 +25,7 @@
 		</p>
 		<form class="bs-example bs-example-form" role="form">
 			<div class="input-group" style="margin-top: 20px;">
-				<span class="input-group-addon">类别:</span>
+				<span class="input-group-addon" id="category">类别:</span>
 				<input type="text"  id="category" class="form-control" value="全部">
 			</div>
 			<!-- <div class="input-group" style="margin-top: 10px;">
@@ -34,11 +33,11 @@
 				<input type="text"  id="search_words" class="form-control" value="">
 			</div> -->
 			<div class="input-group" style="margin-top: 10px;">
-				<span class="input-group-addon">开始:</span>
+				<span class="input-group-addon" id="start-page">开始:</span>
 				<input type="text"  id="start_page" class="form-control" value="1">
 			</div>
 			<div class="input-group" style="margin-top: 10px;">
-				<span class="input-group-addon">结束:</span>
+				<span class="input-group-addon" id="end-page">结束:</span>
 				<input type="text"  id="end_page" class="form-control" value="20">
 			</div>
 			<!--<div class="checkbox">
@@ -52,4 +51,5 @@
 		</form>
 	</div>
 </body>
+<script type="text/javascript" src="js/popup.js"></script>
 </html>

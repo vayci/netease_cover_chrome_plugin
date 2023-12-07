@@ -1,4 +1,7 @@
 {
-	"pluginDesc": {"message": "A simple chrome extension demo"},
-	"helloWorld": {"message": "Hello World!"}
+	"appName": {"message": "Netease Cover Helper"},
+	"category": {"message": "Category"},
+	"startPage": {"message": "Start Page"},
+	"endPage": {"message": "End Page"},
+	"collect": {"message": "COLLECT"}
 }
