@@ -1,6 +1,13 @@
 var menu_1 = null;
 var menu_2 = null;
 
+// i18n
+var downloadSong = chrome.i18n.getMessage('downloadSong');
+var downloadPlaylist = chrome.i18n.getMessage('downloadPlaylist');
+var downloadSongInPlaylist = chrome.i18n.getMessage('downloadSongInPlaylist');
+var downloadDiscoverPlaylist = chrome.i18n.getMessage('downloadDiscoverPlaylist');
+var downloadCollectPlaylist = chrome.i18n.getMessage('downloadCollectPlaylist');
+
 // 根据页面内容创建右键菜单
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
@@ -10,14 +17,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
         case -1:
             break;
         case 1:
-            menu_1 = chrome.contextMenus.create({id: "song-cover", "title": "下载歌曲封面","contexts":["all"]});
+            menu_1 = chrome.contextMenus.create({id: "song-cover", "title": downloadSong,"contexts":["all"]});
             break;
         case 2:
-            menu_1 = chrome.contextMenus.create({id: "playlist-cover", "title": "下载专辑封面","contexts":["all"]});
-            menu_2 = chrome.contextMenus.create({id: "song-cover-in-playlist", "title": "下载专辑内歌曲封面","contexts":["all"]});
+            menu_1 = chrome.contextMenus.create({id: "playlist-cover", "title": downloadPlaylist,"contexts":["all"]});
+            menu_2 = chrome.contextMenus.create({id: "song-cover-in-playlist", "title": downloadSongInPlaylist,"contexts":["all"]});
             break;
         case 3:
-            menu_1 = chrome.contextMenus.create({id: "discover-playlist", "title": "下载推荐专辑封面","contexts":["all"]});
+            menu_1 = chrome.contextMenus.create({id: "discover-playlist", "title": downloadDiscoverPlaylist,"contexts":["all"]});
             break;
         case 4:
             var storage = window.localStorage;
@@ -25,7 +32,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
             chrome.tabs.create({"url":"./search.html"}, function(){});
              break;
         case 5:
-             menu_1 = chrome.contextMenus.create({id: "collect-playlist", "title": "采集收藏歌单封面","contexts":["all"]});
+             menu_1 = chrome.contextMenus.create({id: "collect-playlist", "title": downloadCollectPlaylist,"contexts":["all"]});
             break;
         default:
             console.log('msg', request)

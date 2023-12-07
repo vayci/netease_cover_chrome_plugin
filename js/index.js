@@ -1,6 +1,11 @@
+document.title = chrome.i18n.getMessage('appName');
+var downloadThisCover = chrome.i18n.getMessage('downloadThisCover');
+var extName = chrome.i18n.getMessage('extName');
+var downloadTips = chrome.i18n.getMessage('downloadTips');
+
 $(function(){
 	  chrome.contextMenus.removeAll();
-    chrome.contextMenus.create({id:"single-download","title": "下载这张封面","contexts":["image"]});
+    chrome.contextMenus.create({id:"single-download","title": downloadThisCover,"contexts":["image"]});
   	var category = getQueryString('category');
   	var start_page = getQueryString('start_page');
   	var end_page = getQueryString('end_page');
@@ -44,8 +49,8 @@ function getCoverBycontextMenu(info, tab){
 	chrome.notifications.create(src, {
 		type: 'basic',
 		iconUrl: 'img/icon.png',
-		title: '网易云封面',
-		message: '1张封面开始下载'
+		title: extName,
+		message: '1'+downloadTips
 	});
 	setTimeout(function(){
 			chrome.notifications.clear(src, function(){})
@@ -74,8 +79,8 @@ function dealCovers(auto_download,category,start_page,end_page){
     	chrome.notifications.create("hot_covers", {
 		type: 'basic',
 		iconUrl: 'img/icon.png',
-		title: '网易云封面',
-		message: total+'张封面开始下载'
+		title: extName,
+		message: total+downloadTips
 	});
 	setTimeout(function(){
 			chrome.notifications.clear("hot_covers", function(){})

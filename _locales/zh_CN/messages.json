@@ -1,7 +1,20 @@
 {
+	"extName": {"message": "网易云封面"},
+	"extDesc": {"message": "网易云音乐封面下载工具"},
+
 	"appName": {"message": "网易云封面助手"},
 	"category": {"message": "分类"},
 	"startPage": {"message": "开始"},
 	"endPage": {"message": "结束"},
-	"collect": {"message": "开始采集"}
+	"collect": {"message": "开始采集"},
+
+	"downloadSong": {"message": "下载歌曲封面"},
+	"downloadPlaylist": {"message": "下载专辑封面"},
+	"downloadSongInPlaylist": {"message": "下载专辑内歌曲封面"},
+	"downloadDiscoverPlaylist": {"message": "下载推荐专辑封面"},
+	"downloadCollectPlaylist": {"message": "采集收藏歌单封面"},
+
+	"downloadThisCover": {"message": "下载这张封面"},
+	"downloadTips": {"message": "张封面开始下载"}
+	
 }

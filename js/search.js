@@ -1,3 +1,8 @@
+document.title = chrome.i18n.getMessage('appName');
+var downloadThisCover = chrome.i18n.getMessage('downloadThisCover');
+var extName = chrome.i18n.getMessage('extName');
+var downloadTips = chrome.i18n.getMessage('downloadTips');
+
 console.log('init listener')
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -11,7 +16,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		  $('div').append("<img style='height:90px;width:90px;' src='"+ covers_obj[key]+"&playlist="+key+"'>");
 		  }
 	  chrome.contextMenus.removeAll();
-	  chrome.contextMenus.create({id:"single-download","title": "下载这张封面","contexts":["image"]});
+	  chrome.contextMenus.create({id:"single-download","title": downloadThisCover,"contexts":["image"]});
 	  $("img").click(function(event){
 		  layer.open({
 		  type: 1,
@@ -40,8 +45,8 @@ function getCoverBycontextMenu(info, tab){
 	chrome.notifications.create(src, {
 		type: 'basic',
 		iconUrl: 'img/icon.png',
-		title: '网易云封面',
-		message: '1张封面开始下载'
+		title: extName,
+		message: '1'+downloadTips
 	});
 	setTimeout(function(){
 			chrome.notifications.clear(src, function(){})

@@ -1,7 +1,19 @@
 {
+	"extName": {"message": "Netease Cover Helper"},
+	"extDesc": {"message": "Netease Song Cover Download Tool"},
+	
 	"appName": {"message": "Netease Cover Helper"},
 	"category": {"message": "Category"},
 	"startPage": {"message": "Start Page"},
 	"endPage": {"message": "End Page"},
-	"collect": {"message": "COLLECT"}
+	"collect": {"message": "COLLECT"},
+
+	"downloadSong": {"message": "Download song cover"},
+	"downloadPlaylist": {"message": "Download album cover"},
+	"downloadSongInPlaylist": {"message": "Download song cover in album"},
+	"downloadDiscoverPlaylist": {"message": "Download recommend album cover"},
+	"downloadCollectPlaylist": {"message": "Download collected album cover"},
+
+	"downloadThisCover": {"message": "Download this cover"},
+	"downloadTips": {"message": " cover start download"}
 }
