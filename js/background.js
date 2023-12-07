@@ -78,6 +78,20 @@ function sendMessageToContentScript(message, callback)
     
 }
 
+//向content_script发送消息，获取封面uri
+function sendMessageToContentScript2(message)
+{
+    chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function(tabs) {
+            var tab = tabs[0];
+            console.log('send', tab.id)
+            chrome.tabs.sendMessage(tab.id, message);
+        });
+    
+}
+
 //从ContentScript response下载封面
 function downloadCoverFromResponse(response){
      var uri = response.cover_src;
@@ -85,7 +99,7 @@ function downloadCoverFromResponse(response){
      downloadCover(uri,name);
      chrome.notifications.create(uri, {
         type: 'basic',
-        iconUrl: 'img/icon.png',
+        iconUrl: chrome.runtime.getURL('img/icon.png'),
         title: '网易云封面',
         message: '1张封面开始下载'
     });
@@ -104,7 +118,7 @@ function downloadCoverListFromResponse(cover_list){
     }
     chrome.notifications.create("playlist_covers", {
        type: 'basic',
-       iconUrl: 'img/icon.png',
+       iconUrl: chrome.runtime.getURL('img/icon.png'),
        title: '网易云封面',
        message: cover_list.length+'张封面开始下载'
    });
@@ -145,7 +159,7 @@ function getDiscoverPlayListCover(info, tab){
 
 //个人收藏歌单封面
 function getCollectPlayListCover(info, tab){
-     sendMessageToContentScript({"opt":1,"value":4}, downloadCoverListFromResponse);
+     sendMessageToContentScript2({"opt":1,"value":4});
 }
 
 

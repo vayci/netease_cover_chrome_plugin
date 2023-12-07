@@ -116,7 +116,8 @@ function initPage(){
     	getSearchCover(createCoverPage);
     	return;
     }
-	 chrome.runtime.sendMessage(type, function(response) {});
+	console.log("init page type:", type)
+	chrome.runtime.sendMessage(type, function(response) {});
 }
 
 function showlayer(){
